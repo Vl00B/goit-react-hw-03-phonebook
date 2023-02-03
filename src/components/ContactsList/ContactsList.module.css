@@ -1,0 +1,23 @@
+.list {
+  margin: 30px;
+}
+
+.contact {
+  min-width: 100px;
+  max-width: 300px;
+  padding-bottom: 10px;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* align-content: space-around; */
+  /* flex-direction: row; */
+}
+
+.contact_data {
+  display: inline-flex;
+}
+
+.contact_button {
+  display: block;
+}

@@ -1,0 +1,10 @@
+.phonebook {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact_property {
+  display: inline-block;
+  width: 80px;
+  min-height: 30px;
+}

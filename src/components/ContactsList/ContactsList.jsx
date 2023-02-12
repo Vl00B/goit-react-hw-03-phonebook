@@ -9,7 +9,6 @@ export class ContactsList extends Component {
         <h2 className="title">Contacts</h2>
 
         {this.props.children}
-        {/* Filter position */}
 
         <ul>
           {this.props.contacts.map(contact => {
@@ -38,7 +37,7 @@ export class ContactsList extends Component {
 }
 
 ContactsList.propTypes = {
-  contacts: PropTypes.array.isRequired,
+  contacts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
   deleteContact: PropTypes.func.isRequired,
   children: PropTypes.node,
 };

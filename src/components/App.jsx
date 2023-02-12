@@ -22,14 +22,15 @@ export class App extends Component {
       id: nanoid(),
     };
 
-    for (const contact of this.state.contacts) {
-      if (
-        contact.name.toLowerCase().trim() ===
+    const found = this.state.contacts.find(
+      element =>
+        element.name.toLowerCase().trim() ===
         newContact.name.toLowerCase().trim()
-      ) {
-        alert('There is already contact with this name.');
-        return;
-      }
+    );
+
+    if (found) {
+      alert('There is already contact with this name.');
+      return;
     }
 
     this.setState(prevState => ({
@@ -63,38 +64,27 @@ export class App extends Component {
     }
   };
 
-  componentDidMount() {
-    const savedContacts = localStorage.getItem('contacts');
-    if (savedContacts) {
-      const parsedContacts = JSON.parse(savedContacts);
-      this.setState(prevState => ({
-        contacts: parsedContacts,
-      }));
-      return;
-    } else {
-      return;
-    }
-  }
-
-  componentDidUpdate() {
-    localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-  }
-
   render() {
     return (
       <>
         <ContactForm onSubmitForm={this.toAddContact} />
 
-        <ContactsList
-          contacts={this.onFilter()}
-          children={
-            <Filter
-              toFilterContacts={this.toFilter}
-              filter={this.state.filter}
-            />
-          }
-          deleteContact={this.toRemoveContact}
-        />
+        {this.state.contacts.length ? (
+          <ContactsList
+            contacts={this.onFilter()}
+            children={
+              <Filter
+                toFilterContacts={this.toFilter}
+                filter={this.state.filter}
+              />
+            }
+            deleteContact={this.toRemoveContact}
+          />
+        ) : (
+          <div className="container">
+            <h2>There are no contacts yet.</h2>
+          </div>
+        )}
       </>
     );
   }
